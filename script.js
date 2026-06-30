@@ -217,54 +217,70 @@ painel.appendChild(div);
 // Sorteio
 // ------------------------------
 
-btnSortear.onclick=sortear;
+// ------------------------------
+// Sorteio
+// ------------------------------
+
+btnSortear.onclick = sortear;
 
 function sortear(){
 
-if(usados.length===14){
+    if(usados.length===14){
 
-alert("Todas as perguntas já foram utilizadas.");
+        alert("Todas as perguntas já foram utilizadas.");
 
-return;
+        return;
+
+    }
+
+    btnSortear.disabled = true;
+
+    overlay.style.display = "flex";
+
+    rolling.innerHTML = "?";
+
+    if(drum){
+        drum.currentTime = 0;
+        drum.play().catch(()=>{});
+    }
+
+    let contador = 0;
+
+    const animacao = setInterval(function(){
+
+        rolling.innerHTML = Math.floor(Math.random()*14)+1;
+
+        contador++;
+
+        if(contador>=20){
+
+            clearInterval(animacao);
+
+            finalizarSorteio();
+
+        }
+
+    },100);
 
 }
 
-btnSortear.disabled=true;
+// ======================================
 
-overlay.style.display="flex";
-
-drum.currentTime=0;
-
-drum.play();
-
-let contador=0;
-
-const animacao=setInterval(()=>{
-
-rolling.innerHTML=Math.floor(Math.random()*14)+1;
-
-contador++;
-
-if(contador>=20){
-
-clearInterval(animacao);
-
-finalizarSorteio();
-
-}
-
-},100);
 function finalizarSorteio(){
 
-    drum.pause();
-    drum.currentTime = 0;
+    if(drum){
+        drum.pause();
+        drum.currentTime = 0;
+    }
 
-    let disponiveis = [];
+    const disponiveis=[];
 
     for(let i=1;i<=14;i++){
 
         if(!usados.includes(i)){
+
             disponiveis.push(i);
+
         }
 
     }
@@ -285,7 +301,7 @@ function finalizarSorteio(){
 
     numeroSorteado.classList.add("zoom");
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
         overlay.style.display="none";
 
@@ -301,30 +317,29 @@ function finalizarSorteio(){
 
 function mostrarPergunta(numero){
 
+    const pergunta = perguntas[numero];
+
     perguntaCard.classList.remove("hidden");
 
-    titulo.innerHTML = perguntas[numero].titulo;
+    titulo.innerHTML = pergunta.titulo;
 
-    texto.innerHTML = perguntas[numero].texto;
+    texto.innerHTML = pergunta.texto;
 
     alternativas.innerHTML="";
 
-    perguntas[numero].alternativas.forEach((alt)=>{
+    pergunta.alternativas.forEach(function(alt){
 
         const div=document.createElement("div");
 
         div.className="alternativa";
 
-        div.innerHTML="◯ "+alt;
+        div.innerHTML="◯ " + alt;
 
         alternativas.appendChild(div);
 
     });
 
 }
-}
-
-// ======================================
 
 btnProxima.onclick=function(){
 
