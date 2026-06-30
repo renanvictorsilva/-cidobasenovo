@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Bingo - Ácidos e Bases</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Áudio -->
+    <audio id="drumSound">
+        <source src="tambor.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Overlay do sorteio -->
+    <div id="overlay">
+
+        <div id="overlayContent">
+
+            <h2>SORTEANDO...</h2>
+
+            <div id="rollingNumber">1</div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <header>
+
+            <h1>🧪 BINGO</h1>
+
+            <h2>ÁCIDOS E BASES</h2>
+
+        </header>
+
+        <section id="painel">
+
+            <!-- Gerado automaticamente -->
+
+        </section>
+
+        <section class="acoes">
+
+            <button id="btnSortear">
+
+                🎲 Sortear
+
+            </button>
+
+            <button id="btnReiniciar">
+
+                🔄 Reiniciar
+
+            </button>
+
+        </section>
+
+        <section id="numeroContainer">
+
+            <h3>Número Sorteado</h3>
+
+            <div id="numeroSorteado">
+
+                ?
+
+            </div>
+
+        </section>
+
+        <section id="perguntaCard" class="hidden">
+
+            <h2 id="tituloPergunta"></h2>
+
+            <p id="perguntaTexto"></p>
+
+            <div id="alternativas">
+
+            </div>
+
+            <button id="btnProxima">
+
+                Próximo Sorteio
+
+            </button>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
